@@ -1,26 +1,25 @@
-import React from 'react'
-// import { connect } from 'react-redux'
-// import { searchInput } from '../actions'
+import React from 'react';
 
-let SearchInput = ({ dispatch }) => {
+
+let SearchInput = ({dispatch}) => {
   let searchText;
 
   return (
     <div>
       <form
         onSubmit={e => {
-          e.preventDefault()
+          e.preventDefault();
           if (!searchText.value.trim()) {
-            return
+            return;
           }
           // dispatch(searchInput(searchText.value))
-          console.log(`Submitted searched for: ${searchText.value}`)
-          searchText.value = ''
+          console.log(`Submitted searched for: ${searchText.value}`);
+          searchText.value = '';
         }}
       >
         <input
           ref={node => {
-            searchText = node
+            searchText = node;
           }}
         />
         <button type="submit">
@@ -28,8 +27,7 @@ let SearchInput = ({ dispatch }) => {
         </button>
       </form>
     </div>
-  )
-}
-// SearchInput = connect()(SearchInput)
+  );
+};
 
-export default SearchInput
+export default SearchInput;

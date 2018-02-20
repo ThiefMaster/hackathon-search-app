@@ -1,21 +1,21 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
 
-const ResultSort = ({ sortingOptions, sortValue, sortDirection }) => {
+
+const ResultSort = ({sortingOptions, sortValue, sortDirection}) => {
   return (
     <div>
-        <p>Sort by:</p>
-        <select value={sortValue}>
+      <p>Sort by:</p>
+      <select value={sortValue}>
         {sortingOptions.map(({value, display}) => (
-            <option value={value}>{display}</option>
+          <option value={value}>{display}</option>
         ))}
-        </select>
-        <select value={sortDirection}>
-            <option value="asc">Asc.</option>
-            <option value="desc">Desc.</option>
-        </select>
+      </select>
+      <select value={sortDirection}>
+        <option value="asc">Asc.</option>
+        <option value="desc">Desc.</option>
+      </select>
     </div>
-  )
-}
+  );
+};
 
-export default ResultSort
+export default ResultSort;

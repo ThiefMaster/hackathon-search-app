@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
 
-const ResultCount = ({ count }) => (
+
+const ResultCount = ({count}) => (
   <p>{count}</p>
-)
+);
 
-export default ResultCount
+export default ResultCount;
