@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchFacetsIfNeeded } from '../actions';
+import { fetchResults } from '../actions';
 
 import ResultList from '../components/ResultList';
 import ResultCount from '../components/ResultCount';
@@ -31,11 +31,11 @@ const TEST_SORT_OPTIONS = [
 class AsyncApp extends Component {
   componentDidMount() {
     const {dispatch} = this.props;
-    dispatch(fetchFacetsIfNeeded());
+    dispatch(fetchResults());
   }
 
   render() {
-    const {dispatch, facets, isFetching} = this.props;
+    const {dispatch, facets, data, links, isFetching} = this.props;
     return (
       <div className="App">
         {isFetching && <h2>Loading...</h2>}
@@ -52,23 +52,14 @@ class AsyncApp extends Component {
 
 AsyncApp.propTypes = {
   facets: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  links: PropTypes.object.isRequired,
   isFetching: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
-  const {
-    isFetching,
-    items: facets,
-  } = state.facets || {
-    isFetching: true,
-    items: {},
-  };
-
-  return {
-    facets,
-    isFetching,
-  };
+  return state.results;
 }
 
 export default connect(mapStateToProps)(AsyncApp);

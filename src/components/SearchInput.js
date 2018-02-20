@@ -1,25 +1,21 @@
 import React from 'react';
+import { fetchResults, setSearchTerm } from '../actions';
 
 
 let SearchInput = ({dispatch, isFetching}) => {
-  let searchText;
-
   return (
     <div>
       <form
         onSubmit={e => {
           e.preventDefault();
-          if (!searchText.value.trim()) {
-            return;
-          }
-          // dispatch(searchInput(searchText.value))
-          console.log(`Submitted searched for: ${searchText.value}`);
-          searchText.value = '';
+          dispatch(fetchResults());
         }}
       >
-        <input disabled={isFetching} ref={node => {
-          searchText = node;
-        }}/>
+        <input
+          disabled={isFetching}
+          onChange={e => {
+            dispatch(setSearchTerm(e.target.value.trim()));
+          }}/>
         <button type="submit" disabled={isFetching}>
           Search
         </button>
