@@ -4,12 +4,13 @@ import PropTypes from 'prop-types'
 const ResultSort = ({ sortingOptions, sortValue, sortDirection }) => {
   return (
     <div>
-        <select>
-        {TEST_SORT_OPTIONS.map(({value, display}) => (
+        <p>Sort by:</p>
+        <select value={sortValue}>
+        {sortingOptions.map(({value, display}) => (
             <option value={value}>{display}</option>
         ))}
         </select>
-        <select>
+        <select value={sortDirection}>
             <option value="asc">Asc.</option>
             <option value="desc">Desc.</option>
         </select>
