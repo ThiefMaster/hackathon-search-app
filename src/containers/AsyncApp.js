@@ -8,6 +8,7 @@ import ResultCount from '../components/ResultCount';
 import ResultPagination from '../components/ResultPagination';
 import SearchInput from '../components/SearchInput';
 import ResultSort from '../components/ResultSort';
+import FacetList from '../components/FacetList';
 
 
 const TEST_RESULTS = [
@@ -45,6 +46,7 @@ class AsyncApp extends Component {
         <ResultPagination currentPage={5} resultSize={10} resultCount={TEST_RESULT_COUNT}/>
         <ResultCount count={TEST_RESULT_COUNT}/>
         <ResultList items={TEST_RESULTS}/>
+        <FacetList items={this.props.facets} />
       </div>
     );
   }
