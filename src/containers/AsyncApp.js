@@ -35,6 +35,7 @@ class AsyncApp extends Component {
   }
 
   render() {
+    const {facets, isFetching} = this.props;
     return (
       <div className="App">
         <SearchInput />
@@ -49,6 +50,7 @@ class AsyncApp extends Component {
 
 AsyncApp.propTypes = {
   facets: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
