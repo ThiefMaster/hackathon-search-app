@@ -28,7 +28,7 @@ function fetchFacets() {
 
 function receiveFacets(json) {
   const facets = _.fromPairs(Object.entries(json.aggregations).map(([key, data]) => {
-    return [key, data.buckets.map(_.iteratee('key'))];
+    return [key, data.buckets];
   }));
   return {
     type: RECEIVE_FACETS,
