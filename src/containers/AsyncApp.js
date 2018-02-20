@@ -46,12 +46,28 @@ class AsyncApp extends Component {
     return (
       <div className="App">
         {isFetching && <h2>Loading...</h2>}
-        <SearchInput dispatch={dispatch} isFetching={isFetching}/>
-        <ResultSort dispatch={dispatch} sortingOptions={SORT_OPTIONS} sortValue={searchSortType} sortDirection={searchSortDirection} />
-        <ResultCount count={count}/>
-        <ResultPagination currentPage={1} resultSize={RESULT_SIZE} resultCount={count} maxPageLinks={MAX_PAGINATION_LINKS}/>
-        <ResultList items={items}/>
-        <FacetList dispatch={dispatch} items={facets} activeFacets={searchFacets} />
+        <div className="Header">
+          <h1>JS Hackathon Search App</h1>
+          <div className="SearchBar">
+            <SearchInput dispatch={dispatch} isFetching={isFetching}/>
+          </div>
+        </div>
+        <div className="Content">
+          <div className="Facets">
+            <h2>Facets</h2>
+            <FacetList dispatch={dispatch} items={facets} activeFacets={searchFacets} />
+          </div>
+          <div className="ResultsContent">
+            <div className="ResultsHeader">
+              <ResultCount count={count}/>
+              <ResultPagination currentPage={1} resultSize={RESULT_SIZE} resultCount={count} maxPageLinks={MAX_PAGINATION_LINKS}/>
+              <ResultSort dispatch={dispatch} sortingOptions={SORT_OPTIONS} sortValue={searchSortType} sortDirection={searchSortDirection} />
+            </div>
+            <div className="Results">
+              <ResultList items={items}/>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

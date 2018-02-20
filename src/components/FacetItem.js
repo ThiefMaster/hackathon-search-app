@@ -16,7 +16,7 @@ function renderEntry(dispatch, type, name, count, missing = false) {
           onChange={(e) => {
             dispatch(toggleSearchFacet(type, name, e.target.checked));
           }}/>
-        {name}({count})
+        {name} ({count})
       </label>
     </li>
   );

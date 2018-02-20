@@ -10,6 +10,32 @@ body {
   opacity: 0.8;
 }
 
+.App .Content {
+  padding: 10px;
+  display: flex;
+}
+
+.App .Facets {
+  width: 20%;
+}
+
+.App .Header {
+  align-items: center;
+  display: flex;
+  padding: 10px;
+  margin: 30px;
+}
+
+.App .Header .SearchBar {
+  margin: 20px;
+}
+
+.App .ResultsHeader {
+  margin: 30px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between
+}
 
 .ResultPagination li {
   padding: 5px;
