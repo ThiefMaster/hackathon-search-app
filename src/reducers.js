@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { combineReducers } from 'redux';
 import {
-  REQUEST_RESULTS, RECEIVE_RESULTS, SET_SEARCH_TERM, ENABLE_SEARCH_FACET, DISABLE_SEARCH_FACET,
+  REQUEST_RESULTS, RECEIVE_RESULTS, SET_SEARCH_TERM, SET_SORTING_TYPE, SET_SORTING_DIRECTION, ENABLE_SEARCH_FACET, DISABLE_SEARCH_FACET,
 } from './actions';
 
 
@@ -16,10 +16,14 @@ function results(state = {isFetching: false, facets: {}, data: {}, links: {}}, a
   }
 }
 
-function input(state = {searchTerm: '', searchFacets: {}}, action) {
+function input(state = {searchTerm: '', searchFacets: {}, searchSortType: 'bestmatch', searchSortDirection: 'desc'}, action) {
   switch (action.type) {
     case SET_SEARCH_TERM:
       return {...state, searchTerm: action.searchTerm};
+    case SET_SORTING_TYPE:
+      return {...state, searchSortType: action.sortType};
+    case SET_SORTING_DIRECTION:
+      return {...state, searchSortDirection: action.sortDirection,};
     case ENABLE_SEARCH_FACET: {
       const {category, name} = action;
       const searchFacets = _.cloneDeep(state.searchFacets);

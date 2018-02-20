@@ -3,6 +3,8 @@ import _ from 'lodash';
 export const REQUEST_RESULTS = 'REQUEST_RESULTS';
 export const RECEIVE_RESULTS = 'RECEIVE_RESULTS';
 export const SET_SEARCH_TERM = 'SET_SEARCH_TERM';
+export const SET_SORTING_TYPE = 'SET_SORTING_TYPE';
+export const SET_SORTING_DIRECTION = 'SET_SORTING_DIRECTION';
 export const ENABLE_SEARCH_FACET = 'ENABLE_SEARCH_FACET';
 export const DISABLE_SEARCH_FACET = 'DISABLE_SEARCH_FACET';
 
@@ -27,12 +29,30 @@ export function toggleSearchFacet(category, name, enabled) {
   };
 }
 
+export function setSortingType(sortType) {
+  return {
+    type: SET_SORTING_TYPE,
+    sortType,
+  };
+}
+
+export function setSortingDirection(sortDirection) {
+  return {
+    type: SET_SORTING_DIRECTION,
+    sortDirection,
+  };
+}
+
 export function fetchResults() {
   return (dispatch, getState) => {
     const {input} = getState();
     const url = new URL('https://zenodo.org/api/records/');
     if (input.searchTerm) {
       url.searchParams.append('q', input.searchTerm);
+    }
+    if (input.searchSortType) {
+      let direction = input.searchSortDirection === 'asc' ? '' : '-';
+      url.searchParams.append('sort', `${direction}${input.searchSortType}`);
     }
     Object.entries(input.searchFacets).forEach(([category, facets]) => {
       facets.forEach((facet) => {

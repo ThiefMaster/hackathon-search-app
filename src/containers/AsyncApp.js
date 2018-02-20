@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchResults } from '../actions';
+import _ from 'lodash'
 
 import ResultList from '../components/ResultList';
 import ResultCount from '../components/ResultCount';
@@ -11,22 +12,20 @@ import ResultSort from '../components/ResultSort';
 import FacetList from '../components/FacetList';
 
 
-const TEST_RESULTS = [
-  {title: 'Some title 1', description: 'Some description 1'},
-  {title: 'Some title 2', description: 'Some description 2'},
-  {title: 'Some title 3', description: 'Some description 3'},
-  {title: 'Some title 4', description: 'Some description 4'},
-  {title: 'Some title 5', description: 'Some description 5'},
-];
+const RESULT_SIZE = 20
+const MAX_PAGINATION_LINKS = 10
 
-const TEST_RESULT_COUNT = 95;
-
-const TEST_SORT_OPTIONS = [
+const SORT_OPTIONS = [
   {value: 'mostrecent', display: 'Most recent'},
   {value: 'bestmatch', display: 'Best match'},
   {value: 'publication_date', display: 'Publication date'},
   {value: 'title', display: 'Title'},
 ];
+
+const DEFAULT_SORT_OPTIONS = {
+  sortType: 'bestmatch',
+  sortDirection: 'desc',
+}
 
 
 class AsyncApp extends Component {
@@ -38,17 +37,21 @@ class AsyncApp extends Component {
   render() {
     const {dispatch} = this.props;
     const {facets, data, links, isFetching} = this.props.results;
-    const {searchFacets} = this.props.input;
+    const {searchFacets, searchSortType, searchSortDirection} = this.props.input;
+
+    let hasResults = !_.isEmpty(data)
+    const count = hasResults ? data.total : 0;
+    const items = hasResults ? data.hits : [];
+
     return (
       <div className="App">
         {isFetching && <h2>Loading...</h2>}
         <SearchInput dispatch={dispatch} isFetching={isFetching}/>
-        <ResultSort sortingOptions={TEST_SORT_OPTIONS} sortValue={'bestmatch'} sortDirection={'asc'}
-                    isFetching={isFetching}/>
-        <ResultPagination currentPage={5} resultSize={10} resultCount={TEST_RESULT_COUNT}/>
-        <ResultCount count={TEST_RESULT_COUNT}/>
-        <ResultList items={TEST_RESULTS}/>
-        <FacetList dispatch={dispatch} items={facets} activeFacets={searchFacets}/>
+        <ResultSort dispatch={dispatch} sortingOptions={SORT_OPTIONS} sortValue={searchSortType} sortDirection={searchSortDirection} />
+        <ResultCount count={count}/>
+        <ResultPagination currentPage={1} resultSize={RESULT_SIZE} resultCount={count} maxPageLinks={MAX_PAGINATION_LINKS}/>
+        <ResultList items={items}/>
+        <FacetList dispatch={dispatch} items={facets} activeFacets={searchFacets} />
       </div>
     );
   }

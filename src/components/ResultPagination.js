@@ -1,17 +1,8 @@
 import React from 'react';
 
-
-// pagesCount = total_results / size
-// currentPage
-
 const ResultPagination = ({currentPage, resultSize, resultCount, maxPageLinks}) => {
 
-  // currentPage: 3
-  // resultCount: 55
-  // resultSize: 10
-  // pagesCount: 6
-  let pagesCount = Math.ceil(resultCount / resultSize);
-
+  let pagesCount = Math.min(Math.ceil(resultCount / resultSize), maxPageLinks);
   const pageElements = Array(pagesCount).fill().map((_, i) => (
     <li className={currentPage === (i + 1) ? 'active' : ''}><a href="#">{i + 1}</a></li>
   ));
