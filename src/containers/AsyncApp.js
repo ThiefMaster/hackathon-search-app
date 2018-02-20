@@ -46,7 +46,7 @@ class AsyncApp extends Component {
         <ResultPagination currentPage={5} resultSize={10} resultCount={TEST_RESULT_COUNT}/>
         <ResultCount count={TEST_RESULT_COUNT}/>
         <ResultList items={TEST_RESULTS}/>
-        <FacetList items={this.props.facets} />
+        <FacetList dispatch={dispatch} items={this.props.facets}/>
       </div>
     );
   }
