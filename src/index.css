@@ -24,3 +24,7 @@ body {
 .ResultPagination a {
   color: inherit;
 }
+
+.missing {
+  text-decoration: line-through;
+}

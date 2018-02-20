@@ -1,26 +1,36 @@
+import _ from 'lodash';
 import React from 'react';
 import { toggleSearchFacet } from '../actions';
 
-const FacetItem = ({dispatch, type, entries}) => {
-  // let items = Object.entries(items).map(pair => {k})
+function renderEntry(dispatch, type, name, count, missing = false) {
+  if (missing) {
+    count = 'n/a';
+  }
+  return (
+    <li key={name} className={missing ? 'missing' : ''}>
+      <label>
+        <input
+          type="checkbox"
+          value={name}
+          checked={missing || null}
+          onChange={(e) => {
+            dispatch(toggleSearchFacet(type, name, e.target.checked));
+          }}/>
+        {name}({count})
+      </label>
+    </li>
+  );
+}
 
+const FacetItem = ({dispatch, type, entries, active}) => {
+  let available = entries.map(_.iteratee('key'));
+  let missing = active.filter(key => !available.includes(key));
   return (
     <div>
       <strong>{type}</strong>
       <ul>
-        {entries.map((value) => (
-          <li key={value.key}>
-            <label>
-              <input
-                type="checkbox"
-                value={value.key}
-                onChange={(e) => {
-                  dispatch(toggleSearchFacet(type, value.key, e.target.checked));
-                }}/>
-              {value.key}({value.doc_count})
-            </label>
-          </li>
-        ))}
+        {entries.map(value => renderEntry(dispatch, type, value.key, value.doc_count))}
+        {missing.map(value => renderEntry(dispatch, type, value, 0, true))}
       </ul>
     </div>
 

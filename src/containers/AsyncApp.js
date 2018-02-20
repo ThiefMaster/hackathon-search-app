@@ -36,7 +36,9 @@ class AsyncApp extends Component {
   }
 
   render() {
-    const {dispatch, facets, data, links, isFetching} = this.props;
+    const {dispatch} = this.props;
+    const {facets, data, links, isFetching} = this.props.results;
+    const {searchFacets} = this.props.input;
     return (
       <div className="App">
         {isFetching && <h2>Loading...</h2>}
@@ -46,7 +48,7 @@ class AsyncApp extends Component {
         <ResultPagination currentPage={5} resultSize={10} resultCount={TEST_RESULT_COUNT}/>
         <ResultCount count={TEST_RESULT_COUNT}/>
         <ResultList items={TEST_RESULTS}/>
-        <FacetList dispatch={dispatch} items={this.props.facets}/>
+        <FacetList dispatch={dispatch} items={facets} activeFacets={searchFacets}/>
       </div>
     );
   }
@@ -61,7 +63,7 @@ AsyncApp.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return state.results;
+  return state;
 }
 
 export default connect(mapStateToProps)(AsyncApp);
