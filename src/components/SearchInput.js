@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-let SearchInput = ({dispatch}) => {
+let SearchInput = ({dispatch, isFetching}) => {
   let searchText;
 
   return (
@@ -17,12 +17,10 @@ let SearchInput = ({dispatch}) => {
           searchText.value = '';
         }}
       >
-        <input
-          ref={node => {
-            searchText = node;
-          }}
-        />
-        <button type="submit">
+        <input disabled={isFetching} ref={node => {
+          searchText = node;
+        }}/>
+        <button type="submit" disabled={isFetching}>
           Search
         </button>
       </form>
