@@ -3,3 +3,24 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.8;
+}
+
+
+.ResultPagination li {
+  padding: 5px;
+  display: inline;
+}
+
+.ResultPagination .active {
+  background-color: blue;
+  color: white;
+}
+
+.ResultPagination a {
+  color: inherit;
+}
