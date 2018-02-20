@@ -38,6 +38,7 @@ class AsyncApp extends Component {
     const {facets, isFetching} = this.props;
     return (
       <div className="App">
+        {isFetching && <h2>Loading...</h2>}
         <SearchInput />
         <ResultSort sortingOptions={TEST_SORT_OPTIONS} sortValue={"bestmatch"} sortDirection={"asc"} />
         <ResultPagination currentPage={5} resultSize={10} resultCount={TEST_RESULT_COUNT} />
